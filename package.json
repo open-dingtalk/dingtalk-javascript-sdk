@@ -1,5 +1,5 @@
 {
-  "name": "dingtalk-sdk",
+  "name": "dingtalk-javascript-sdk",
   "version": "0.1.4",
   "description": "🔥 Dingtalk All Container Js Api SDK",
   "main": "dist/dingtalk-sdk-min.js",
