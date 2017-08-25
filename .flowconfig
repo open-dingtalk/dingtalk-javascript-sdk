@@ -1,0 +1,12 @@
+[ignore]
+
+.*/build/.*
+.*/dist/.*
+.*/package/.*
+
+[libs]
+flow
+
+[options]
+module.name_mapper='shared/\(.*\)$' -> '<PROJECT_ROOT>/src/shared/\1'
+module.name_mapper='core/\(.*\)$' -> '<PROJECT_ROOT>/src/core/\1'
