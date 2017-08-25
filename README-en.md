@@ -89,7 +89,7 @@ then Vue code（Hello.vue）：
 example：
 
 ```JavaScript
-import dingtalk from 'weex-dingtalk';
+import dingtalk from 'dingtalk-javascript-sdk';
 dingtalk.ready(function(){
   const dd = dingtalk.apis;
   dd.biz.navigation.setTitle({
@@ -103,7 +103,7 @@ dingtalk.ready(function(){
 example:
 
 ```JavaScript
-import dingtalk from 'weex-dingtalk';
+import dingtalk from 'dingtalk-javascript-sdk';
 dingtalk.config({
   any Object your server response sign
 });
@@ -114,7 +114,7 @@ dingtalk.config({
 example:
 
 ```JavaScript
-import dingtalk from 'weex-dingtalk';
+import dingtalk from 'dingtalk-javascript-sdk';
 dingtalk.error(function(err){
   console.log(err);
 });
@@ -124,13 +124,13 @@ dingtalk.error(function(err){
 example:
 
 ```JavaScript
-import dingtalk from 'weex-dingtalk';
+import dingtalk from 'dingtalk-javascript-sdk';
 dingtalk.ready(function(){
   const dd = dingtalk.apis;
 });
 ```
 
-## Describe the weex-dingtalk apis
+## Describe the dingtalk-javascript-sdk apis
 
 * config （Function | 参数 Object | 返回值 void）
 * ready （Function | 参数 Function Callback | 返回值 void）
@@ -147,7 +147,7 @@ Web：
 
 ```JavaScript
 
-import dingtalk from 'weex-dingtalk';
+import dingtalk from 'dingtalk-javascript-sdk';
 
 dingtalk.ready(function(){
   const dd = dingtalk.apis;
