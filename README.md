@@ -28,24 +28,24 @@ import View from 'rax-view';
 import Text from 'rax-text';
 import dingtalk from 'dingtalk-javascript-sdk';
 export default class App extends Component{
-	render(){
-		return(
-			<View>
-				<Text onPress={
-					()=>{
-						dingtalk.ready(function(){
-							const dd = dingtalk.apis;
-							dd.biz.util.openLink({
-								url: 'https://github.com/icepy/dingtalk-javascript-sdk'
-							})
-						})
-					}
-				}>
-					Hello World icepy !!!
-				</Text>
-			</View>
-		);
-	}
+  render(){
+    return(
+      <View>
+      <Text onPress={
+        ()=>{
+          dingtalk.ready(function(){
+            const dd = dingtalk.apis;
+            dd.biz.util.openLink({
+              url: 'https://github.com/icepy/dingtalk-javascript-sdk'
+            })
+          })
+        }
+      }>
+        Hello World icepy !!!
+      </Text>
+      </View>
+    );
+  }
 }
 ```
 
