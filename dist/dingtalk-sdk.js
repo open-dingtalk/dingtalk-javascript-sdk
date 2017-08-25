@@ -4,16 +4,16 @@ var weexEnv = {};
 
 if (typeof weex !== 'undefined') {
   var config = weex.config;
-  var _env = config.env;
-  weexEnv.platform = _env.platform;
+  var env = config.env;
+  weexEnv.platform = env.platform;
   weexEnv.bundleFrameworkType = 'Vue';
   if (weexEnv.platform !== 'Web') {
     weexEnv.dingtalk = {
       bundleUrl: config.bundleUrl,
       originalUrl: config.originalUrl
     };
-    weexEnv.appVersion = _env.appVersion;
-    weexEnv.appName = _env.appName;
+    weexEnv.appVersion = env.appVersion;
+    weexEnv.appName = env.appName;
   }
 } else {
   if (typeof callNative === 'function') {
@@ -26,8 +26,8 @@ if (typeof weex !== 'undefined') {
 }
 
 var isWeb = weexEnv.platform === 'Web';
-var isWeexiOS = env.platform === 'iOS';
-var isWeexAndroid = env.platform === 'android';
+var isWeexiOS = weexEnv.platform === 'iOS';
+var isWeexAndroid = weexEnv.platform === 'android';
 var isWeex = isWeexiOS || isWeexAndroid;
 
 var UA = void 0;

@@ -26,8 +26,8 @@ if (typeof weex !== 'undefined'){
 }
 
 const isWeb = weexEnv.platform === 'Web';
-const isWeexiOS = env.platform === 'iOS';
-const isWeexAndroid = env.platform === 'android';
+const isWeexiOS = weexEnv.platform === 'iOS';
+const isWeexAndroid = weexEnv.platform === 'android';
 const isWeex = isWeexiOS || isWeexAndroid;
 
 let UA;
