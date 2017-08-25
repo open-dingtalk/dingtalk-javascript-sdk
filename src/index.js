@@ -1,7 +1,3 @@
-/**
- * Created by xiangwenwen on 2017/3/27.
- */
-
 // @flow
 import weexEnvVar from 'dingtalk-sdk-polyfills';
 import initWebDingtalkSDK from './platforms/web/index.js';
