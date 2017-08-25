@@ -1,28 +1,10 @@
-# weex-dingtalk Doc
-
-[![Build Status](https://travis-ci.org/icepy/weex-dingtalk.svg?branch=master)](https://travis-ci.org/icepy/weex-dingtalk)
-
-weex-dingtalk is a JavaScript SDK powered by Dingtalk weex Container, which is an awesome solution for building Dingtalk microapp with extremely high performanece.
-
-Usually you can build your microapp in Dingtalk as a traditional webapp, however sometimes your users are unsatisfied with the poor performance of your webapp. Why? Nowadays the gap between web and native, in the aspect of performance and user experience, is still wide. You might feel frustrated to optimize the performance of your webapp, but finally bring just a little improvement. That is why we need weex.
-
-With the help of weex, you can focus on your business, no more need to worry about the performance, just enjoy the fun of coding and building your microapp. The microapps based on weex will look so elegant and run so smoothly that your users cannot tell the difference between a weex microapp developed by javascript and a native user interface developed by java or objective-c.
-
-The code you write for a weex microapp is javascript and css, you will feel so familiar if you are a web developer. Under the hood, weex render engine parse your code and render a completely native user interface, rather than a web user interface.
-
-Enjoy the fun of building dingtalk microapp with weex ☺
-
-## For Chinese
-
-[SDK中文文档](https://github.com/icepy/weex-dingtalk/blob/master/README-cn.md)
-
 ## Install
 
 ```bash
-npm install weex-dingtalk --save
+npm install dingtalk-javascript-sdk --save
 ```
 
-> Note：using `--save` save weex-dingtalk version in your package.json
+> Note：using `--save` save dingtalk-javascript-sdk version in your package.json
 
 ## How using it？
 
@@ -47,7 +29,7 @@ then Vue code（Hello.vue）：
 
         var stream = weex.requireModule('stream');
         var modal = weex.requireModule('modal');
-        var dingtalk = require('weex-dingtalk');
+        var dingtalk = require('dingtalk-javascript-sdk');
 
         export default {
             name: 'hello',
