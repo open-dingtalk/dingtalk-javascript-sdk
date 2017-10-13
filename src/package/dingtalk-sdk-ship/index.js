@@ -5,7 +5,7 @@
 import exec from 'dingtalk-sdk-exec';
 import EventEmitter from './global-api/EventEmitter.js';
 import parseJsApis from './core/parseJsApis.js';
-import { env,requireModule } from 'dingtalk-javascript-utility';
+import { env,requireModule,log, LogType } from 'dingtalk-javascript-utility';
 
 let globalEvent = {};
 const { isWeex } = env;
@@ -36,7 +36,7 @@ function rtFunc(method){
 }
 
 function initDingtalkRequire(cb){
-    rtFunc('getModules')(cb);
+  rtFunc('getModules')(cb);
 }
 
 let ship = {
@@ -75,7 +75,7 @@ let ship = {
     globalEvent.addEventListener(type,function(e){
       const event = {
         preventDefault: function () {
-          console.warn('当前环境不支持 preventDefault')
+          log(['does not support preventDefault'],LogType.WARNING);
         },
         detail: e
       };

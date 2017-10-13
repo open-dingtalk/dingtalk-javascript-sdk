@@ -3,7 +3,7 @@
  */
 import ship from 'dingtalk-sdk-ship';
 
-export default function permissionJsApis(cb,jsApisConfig, errorCb){
+export default function permissionJsApis(cb,jsApisConfig,errorCb){
   if (!jsApisConfig){
     ship.ready(function(){
       cb(null);
@@ -12,8 +12,8 @@ export default function permissionJsApis(cb,jsApisConfig, errorCb){
   }
   ship.ready(function(){
     const permission = ship.apis.runtime.permission;
-    let apisConf = jsApisConfig ? jsApisConfig : {};
-    let errCb = errorCb ? errorCb : null;
+    let apisConf =  jsApisConfig || {};
+    let errCb = errorCb || null;
     apisConf.onSuccess = function(response){
       cb(null, response);
     };

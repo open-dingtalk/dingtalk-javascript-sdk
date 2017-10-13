@@ -1,3 +1,7 @@
+/**
+ * Created by xiangwenwen on 2017/3/27.
+ */
+
 import initWebDingtalkSDK from './platforms/web/index.js';
 import initWeexDingtalkSDK from './platforms/weex/index.js';
 import { log, LogType, env } from 'dingtalk-javascript-utility';

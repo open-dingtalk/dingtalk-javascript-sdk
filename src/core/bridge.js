@@ -1,3 +1,7 @@
+/**
+ * Created by xiangwenwen on 2017/3/27.
+ */
+
 import ship from 'dingtalk-sdk-ship';
 import { log, LogType } from 'dingtalk-javascript-utility';
 import { extend } from 'shared/util.js';
