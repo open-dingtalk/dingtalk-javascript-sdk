@@ -6,13 +6,14 @@
 
 import android_exec from './android_exec.js';
 import ios_exec from './ios_exec.js';
-import weexInstanceVar from 'dingtalk-sdk-polyfills';
+import polyfills from 'dingtalk-sdk-polyfills';
 import web_exec from './web_exec.js';
 
-let platform  = weexInstanceVar.env.platform;
+let env  = polyfills.env;
 let nativeExec: ?Function = null;
-if (platform !== 'Web'){
-  nativeExec = weexInstanceVar.requireModule('nuvajs-exec').exec;
+const { isWeex, isWeexiOS, isWeexAndroid } = env;
+if (isWeex){
+  nativeExec = polyfills.requireModule('nuvajs-exec').exec;
 }
 
 function exec_affirm(plugin: string, action: string, args: ?Object,onSuccess: ?Function, onFail: ?Function, context: ?Object){
@@ -41,9 +42,9 @@ function exec_affirm(plugin: string, action: string, args: ?Object,onSuccess: ?F
 
 function exec(config:Object) {
   let native_exec: Function = nativeExec ? nativeExec : function(){};
-  if (platform === 'iOS'){
+  if (isWeexiOS){
     ios_exec(native_exec,config);
-  } else if(platform === 'android') {
+  } else if(isWeexAndroid) {
     android_exec(native_exec,config);
   } else {
     web_exec(config);

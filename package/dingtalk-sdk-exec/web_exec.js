@@ -1,13 +1,14 @@
 /* @flow */
 
-import weexEnvVar from 'dingtalk-sdk-polyfills';
+import polyfills from 'dingtalk-sdk-polyfills';
 
-let platform = weexEnvVar.env.platform;
+let env = polyfills.env
 let isAndroid = null;
 let isIOS = null;
 let bridgeReady = false;
+const { isWeb } = env;
 
-if (platform === 'Web'){
+if (isWeb){
   const UA = window.navigator.userAgent.toLowerCase();
   isAndroid = UA && UA.indexOf('android') > -1;
   isIOS = UA && /iphone|ipad|ipod|ios/.test(UA);

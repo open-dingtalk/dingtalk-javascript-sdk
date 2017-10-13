@@ -1,9 +1,10 @@
 /* @flow */
 
-import env from './core/env.js';
-import initRequire from './core/requireModule.js';
+import utility from 'dingtalk-javascript-utility';
+
+const { env, requireModule } = utility;
 
 export default {
-  env: env,
-  requireModule: initRequire()
+  env,
+  requireModule
 };

@@ -7,6 +7,7 @@ var uglify = require('rollup-plugin-uglify');
 var watch = require('rollup-watch');
 var alias = require('rollup-plugin-alias');
 var configAlias = require('./alias.js');
+var commonjs = require('rollup-plugin-commonjs');
 
 var isWatch = false;
 if (process.argv[3]) {
@@ -20,15 +21,15 @@ if (process.argv[2]){
 function build(name){
   let config = {
     entry: './src/index.js',
-    plugins: [ alias(configAlias),resolve(),babel() ],
-    dest:'./dist/dingtalk-sdk.js',
+    plugins: [ alias(configAlias),resolve(),commonjs(),babel() ],
+    dest:'./dist/dingtalk-javascript-sdk.js',
     format: 'cjs',
     sourceMap: true
   };
 
   if (name === 'build'){
     config.plugins.push(uglify());
-    config.dest = './dist/dingtalk-sdk-min.js'
+    config.dest = './dist/dingtalk-javascript-sdk-min.js'
   }
 
   if (isWatch){

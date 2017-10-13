@@ -7,12 +7,13 @@
 import exec from 'dingtalk-sdk-exec';
 import EventEmitter from './global-api/EventEmitter.js';
 import parseJsApis from './core/parseJsApis.js';
-import weexInstanceVar from 'dingtalk-sdk-polyfills';
+import polyfills from 'dingtalk-sdk-polyfills';
 
-let platform = weexInstanceVar.env.platform;
+let env = polyfills.env;
 let globalEvent: Object = {};
-if (platform !== 'Web'){
-  globalEvent = weexInstanceVar.requireModule('globalEvent');
+const { isWeex } = env;
+if (isWeex){
+  globalEvent = polyfills.requireModule('globalEvent');
 }
 
 function rtFunc(method: string): Function {
