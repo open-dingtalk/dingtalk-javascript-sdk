@@ -488,6 +488,10 @@ var requireModule = requireModule$1;
 var log = dingLogger$1.log;
 var LogType = dingLogger$1.LogType;
 
+/**
+ * Created by xiangwenwen on 2017/3/27.
+ */
+
 var isAndroid = null;
 var isIOS = null;
 var bridgeReady = false;
@@ -999,16 +1003,16 @@ var isWeb = env.isWeb;
 
 if (!isDingtalk) {
   log(['can only open the page be Dingtalk Container'], LogType.WARNING);
-}
-
-if (initCtrl) {
-  initCtrl = false;
-  if (isWeex) {
-    dingtalkSDK = initWeexDingtalkSDK();
-  } else if (isWeb) {
-    dingtalkSDK = initWebDingtalkSDK();
+} else {
+  if (initCtrl) {
+    initCtrl = false;
+    if (isWeex) {
+      dingtalkSDK = initWeexDingtalkSDK();
+    } else if (isWeb) {
+      dingtalkSDK = initWebDingtalkSDK();
+    }
+    dingtalkSDK.init();
   }
-  dingtalkSDK.init();
 }
 
 var dingtalkSDK$1 = dingtalkSDK;
