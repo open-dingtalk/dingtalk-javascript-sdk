@@ -12,16 +12,16 @@ const { isDingtalk, isWeex, isWeb } = env;
 
 if (!isDingtalk){
   log(['can only open the page be Dingtalk Container'],LogType.WARNING);
-}
-
-if (initCtrl){
-  initCtrl = false;
-  if (isWeex){
-    dingtalkSDK = initWeexDingtalkSDK();
-  } else if (isWeb){
-    dingtalkSDK = initWebDingtalkSDK();
+} else {
+  if (initCtrl){
+    initCtrl = false;
+    if (isWeex){
+      dingtalkSDK = initWeexDingtalkSDK();
+    } else if (isWeb){
+      dingtalkSDK = initWebDingtalkSDK();
+    }
+    dingtalkSDK.init();
   }
-  dingtalkSDK.init();
 }
 
 export default dingtalkSDK;

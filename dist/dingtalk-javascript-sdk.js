@@ -1,5 +1,62 @@
 'use strict';
 
+/**
+ * Created by xiangwenwen on 2017/3/24.
+ */
+
+var STATUS_OK = '1';
+var STATUS_ERROR = '2';
+
+function android_exec(exec, config) {
+  var body = config.body;
+  var win = config.onSuccess;
+  var fail = config.onFail;
+  var context = config.context;
+  if (exec && typeof exec === 'function') {
+    exec(body, function (response) {
+      if (typeof response !== "undefined" && response.__status__) {
+        var status = response.__status__;
+        var message = response.__message__;
+        if (STATUS_OK === status) {
+          win && win.call(context, message);
+        } else if (STATUS_ERROR === status) {
+          fail && fail.call(context, message);
+        }
+      } else {
+        fail && fail.call('-1', "");
+      }
+    });
+  } else {
+    fail && fail.call('-1', "");
+  }
+}
+
+/**
+ * Created by xiangwenwen on 2017/3/24.
+ */
+
+function ios_exec(exec, config) {
+  var body = config.body;
+  var win = config.onSuccess;
+  var fail = config.onFail;
+  var context = config.context;
+  if (exec && typeof exec === 'function') {
+    exec(body, function (response) {
+      if (typeof response !== "undefined") {
+        if ('0' === response.errorCode) {
+          win && win.call(context, response.result);
+        } else {
+          fail && fail.call(context, response.result);
+        }
+      } else {
+        fail && fail.call('-1', "");
+      }
+    });
+  } else {
+    fail && fail.call('-1', "");
+  }
+}
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
 } : function (obj) {
@@ -248,13 +305,13 @@ function getEnv() {
   return containerEnv;
 }
 
-var env$2 = getEnv();
-var isWeb$1 = env$2.platform === 'Web';
-var isWeexiOS = env$2.platform === 'iOS';
-var isWeexAndroid = env$2.platform === 'android';
-var isWeex$1 = isWeexiOS || isWeexAndroid;
-var dingtalk = env$2.dingtalk;
-var bundleFrameworkType = env$2.bundleFrameworkType;
+var env$1 = getEnv();
+var isWeb$1 = env$1.platform === 'Web';
+var isWeexiOS$1 = env$1.platform === 'iOS';
+var isWeexAndroid$1 = env$1.platform === 'android';
+var isWeex$3 = isWeexiOS$1 || isWeexAndroid$1;
+var dingtalk = env$1.dingtalk;
+var bundleFrameworkType = env$1.bundleFrameworkType;
 var bundleUrl = dingtalk.bundleUrl;
 var originalUrl = dingtalk.originalUrl;
 
@@ -267,8 +324,8 @@ if (isWeb$1) {
 var isDingtalk$1 = dingtalkContainer();
 
 function dingtalkContainer() {
-  if (isWeex$1) {
-    if (env$2.appName === 'DingTalk' || env$2.appName === 'com.alibaba.android.rimet') {
+  if (isWeex$3) {
+    if (env$1.appName === 'DingTalk' || env$1.appName === 'com.alibaba.android.rimet') {
       return true;
     }
     return false;
@@ -300,7 +357,7 @@ function fetchVersion() {
     var _version = matches && matches[1];
     return _version;
   } else {
-    return env$2.appVersion;
+    return env$1.appVersion;
   }
 }
 
@@ -315,9 +372,9 @@ function toPlatform() {
       platform = 'web.android';
     } else if (isWebiOS) {
       platform = 'web.ios';
-    } else if (isWeexAndroid) {
+    } else if (isWeexAndroid$1) {
       platform = 'weex.android';
-    } else if (isWeexiOS) {
+    } else if (isWeexiOS$1) {
       platform = 'weex.ios';
     }
   } else {
@@ -326,14 +383,14 @@ function toPlatform() {
   return platform;
 }
 
-var env$3 = {
+var env$2 = {
   isDingtalk: isDingtalk$1,
   isWeb: isWeb$1,
   isWebiOS: isWebiOS,
   isWebAndroid: isWebAndroid,
-  isWeex: isWeex$1,
-  isWeexiOS: isWeexiOS,
-  isWeexAndroid: isWeexAndroid,
+  isWeex: isWeex$3,
+  isWeexiOS: isWeexiOS$1,
+  isWeexAndroid: isWeexAndroid$1,
   bundleFrameworkType: bundleFrameworkType,
   bundleUrl: bundleUrl,
   originalUrl: originalUrl,
@@ -341,12 +398,12 @@ var env$3 = {
   platform: toPlatform()
 };
 
-var bundleFrameworkType$1 = env$3.bundleFrameworkType;
-var isWeex$2 = env$3.isWeex;
+var bundleFrameworkType$1 = env$2.bundleFrameworkType;
+var isWeex$4 = env$2.isWeex;
 
 
 function requireModule$1(name) {
-  if (isWeex$2) {
+  if (isWeex$4) {
     if (bundleFrameworkType$1 === 'Vue') {
       return weex.requireModule(name);
     } else {
@@ -415,7 +472,7 @@ var log$1 = function log(logArr) {
   });
 };
 
-log$1(['current environment: ' + env$3.platform]);
+log$1(['current environment: ' + env$2.platform]);
 
 var dingLogger$1 = {
   log: log$1,
@@ -423,7 +480,7 @@ var dingLogger$1 = {
   LogType: LogType$1
 };
 
-var env$1 = env$3;
+var env = env$2;
 
 var requireModule = requireModule$1;
 
@@ -431,77 +488,10 @@ var requireModule = requireModule$1;
 var log = dingLogger$1.log;
 var LogType = dingLogger$1.LogType;
 
-/* @flow */
-
-var polyfills = {
-  env: env$1,
-  requireModule: requireModule,
-  log: log,
-  LogType: LogType
-};
-
-/**
- * Created by xiangwenwen on 2017/3/24.
- */
-
-var STATUS_OK = '1';
-var STATUS_ERROR = '2';
-
-function android_exec(exec, config) {
-  var body = config.body;
-  var win = config.onSuccess;
-  var fail = config.onFail;
-  var context = config.context;
-  if (exec && typeof exec === 'function') {
-    exec(body, function (response) {
-      if (typeof response !== "undefined" && response.__status__) {
-        var status = response.__status__;
-        var message = response.__message__;
-        if (STATUS_OK === status) {
-          win && win.call(context, message);
-        } else if (STATUS_ERROR === status) {
-          fail && fail.call(context, message);
-        }
-      } else {
-        fail && fail.call('-1', "");
-      }
-    });
-  } else {
-    fail && fail.call('-1', "");
-  }
-}
-
-/**
- * Created by xiangwenwen on 2017/3/24.
- */
-
-function ios_exec(exec, config) {
-  var body = config.body;
-  var win = config.onSuccess;
-  var fail = config.onFail;
-  var context = config.context;
-  if (exec && typeof exec === 'function') {
-    exec(body, function (response) {
-      if (typeof response !== "undefined") {
-        if ('0' === response.errorCode) {
-          win && win.call(context, response.result);
-        } else {
-          fail && fail.call(context, response.result);
-        }
-      } else {
-        fail && fail.call('-1', "");
-      }
-    });
-  } else {
-    fail && fail.call('-1', "");
-  }
-}
-
-var env$6 = polyfills.env;
 var isAndroid = null;
 var isIOS = null;
 var bridgeReady = false;
-var isWeb$2 = env$6.isWeb;
+var isWeb$2 = env.isWeb;
 
 
 if (isWeb$2) {
@@ -580,21 +570,20 @@ function web_exec(config) {
  * Created by xiangwenwen on 2017/3/24.
  */
 
-var env$5 = polyfills.env;
 var nativeExec = null;
-var isWeex$6 = env$5.isWeex;
-var isWeexiOS$1 = env$5.isWeexiOS;
-var isWeexAndroid$1 = env$5.isWeexAndroid;
+var isWeex$2 = env.isWeex;
+var isWeexiOS = env.isWeexiOS;
+var isWeexAndroid = env.isWeexAndroid;
 
-if (isWeex$6) {
-  nativeExec = polyfills.requireModule('nuvajs-exec').exec;
+if (isWeex$2) {
+  nativeExec = requireModule('nuvajs-exec').exec;
 }
 
 function exec(config) {
   var native_exec = nativeExec ? nativeExec : function () {};
-  if (isWeexiOS$1) {
+  if (isWeexiOS) {
     ios_exec(native_exec, config);
-  } else if (isWeexAndroid$1) {
+  } else if (isWeexAndroid) {
     android_exec(native_exec, config);
   } else {
     web_exec(config);
@@ -772,12 +761,11 @@ function parseJsApis(jsApis) {
  * Created by xiangwenwen on 2017/3/24.
  */
 
-var env$4 = polyfills.env;
 var globalEvent = {};
-var isWeex$5 = env$4.isWeex;
+var isWeex$1 = env.isWeex;
 
-if (isWeex$5) {
-  globalEvent = polyfills.requireModule('globalEvent');
+if (isWeex$1) {
+  globalEvent = requireModule('globalEvent');
 }
 
 function rtFunc(method) {
@@ -840,7 +828,7 @@ var ship = {
     globalEvent.addEventListener(type, function (e) {
       var event = {
         preventDefault: function preventDefault() {
-          console.warn('当前环境不支持 preventDefault');
+          log(['does not support preventDefault'], LogType.WARNING);
         },
         detail: e
       };
@@ -888,8 +876,8 @@ function permissionJsApis(cb, jsApisConfig, errorCb) {
   }
   ship.ready(function () {
     var permission = ship.apis.runtime.permission;
-    var apisConf = jsApisConfig ? jsApisConfig : {};
-    var errCb = errorCb ? errorCb : null;
+    var apisConf = jsApisConfig || {};
+    var errCb = errorCb || null;
     apisConf.onSuccess = function (response) {
       cb(null, response);
     };
@@ -903,6 +891,10 @@ function permissionJsApis(cb, jsApisConfig, errorCb) {
     permission.requestJsApis(apisConf);
   });
 }
+
+/**
+ * Created by xiangwenwen on 2017/3/27.
+ */
 
 var dingtalkJsApisConfig = null;
 var dingtalkQueue = null;
@@ -994,14 +986,16 @@ function initWeexDingtalkSDK() {
   return dingtalk;
 }
 
+/**
+ * Created by xiangwenwen on 2017/3/27.
+ */
+
 var initCtrl = true;
-var env$$1 = polyfills.env;
-var isDingtalk = env$$1.isDingtalk;
-var isWeex = env$$1.isWeex;
-var isWeb = env$$1.isWeb;
-
-
 var dingtalkSDK = {};
+var isDingtalk = env.isDingtalk;
+var isWeex = env.isWeex;
+var isWeb = env.isWeb;
+
 
 if (!isDingtalk) {
   log(['can only open the page be Dingtalk Container'], LogType.WARNING);

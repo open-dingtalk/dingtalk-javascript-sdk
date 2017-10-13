@@ -1,3 +1,7 @@
+/**
+ * Created by xiangwenwen on 2017/3/27.
+ */
+
 import { env } from 'dingtalk-javascript-utility';
 
 let isAndroid = null;
