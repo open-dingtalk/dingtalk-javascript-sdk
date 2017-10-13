@@ -5,13 +5,12 @@
 import exec from 'dingtalk-sdk-exec';
 import EventEmitter from './global-api/EventEmitter.js';
 import parseJsApis from './core/parseJsApis.js';
-import polyfills from 'dingtalk-sdk-polyfills';
+import { env,requireModule } from 'dingtalk-javascript-utility';
 
-let env = polyfills.env;
 let globalEvent = {};
 const { isWeex } = env;
 if (isWeex){
-  globalEvent = polyfills.requireModule('globalEvent');
+  globalEvent = requireModule('globalEvent');
 }
 
 function rtFunc(method){

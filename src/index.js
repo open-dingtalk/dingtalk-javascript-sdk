@@ -1,13 +1,10 @@
-import polyfills from 'dingtalk-sdk-polyfills';
 import initWebDingtalkSDK from './platforms/web/index.js';
 import initWeexDingtalkSDK from './platforms/weex/index.js';
-import { log, LogType } from 'dingtalk-javascript-utility';
+import { log, LogType, env } from 'dingtalk-javascript-utility';
 
 let initCtrl = true;
-let env = polyfills.env;
-const { isDingtalk, isWeex, isWeb } = env;
-
 let dingtalkSDK= {};
+const { isDingtalk, isWeex, isWeb } = env;
 
 if (!isDingtalk){
   log(['can only open the page be Dingtalk Container'],LogType.WARNING);

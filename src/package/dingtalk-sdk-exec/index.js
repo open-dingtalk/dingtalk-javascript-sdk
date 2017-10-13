@@ -4,14 +4,13 @@
 
 import android_exec from './android_exec.js';
 import ios_exec from './ios_exec.js';
-import polyfills from 'dingtalk-sdk-polyfills';
+import { env,requireModule } from 'dingtalk-javascript-utility';
 import web_exec from './web_exec.js';
 
-let env  = polyfills.env;
 let nativeExec = null;
 const { isWeex, isWeexiOS, isWeexAndroid } = env;
 if (isWeex){
-  nativeExec = polyfills.requireModule('nuvajs-exec').exec;
+  nativeExec = requireModule('nuvajs-exec').exec;
 }
 
 function exec_affirm(plugin, action, args,onSuccess, onFail, context){

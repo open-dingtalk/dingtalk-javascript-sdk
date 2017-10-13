@@ -1,6 +1,5 @@
-import polyfills from 'dingtalk-sdk-polyfills';
+import { env } from 'dingtalk-javascript-utility';
 
-let env = polyfills.env
 let isAndroid = null;
 let isIOS = null;
 let bridgeReady = false;
