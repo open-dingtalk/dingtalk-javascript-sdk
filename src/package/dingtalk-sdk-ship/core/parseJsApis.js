@@ -2,11 +2,9 @@
  * Created by xiangwenwen on 2017/3/27.
  */
 
-//@flow
-
 import exec from 'dingtalk-sdk-exec';
 
-function createApi(_name:string,_action:string){
+function createApi(_name,_action){
   return function(params){
     if (!params) {
       params = {};
@@ -29,7 +27,7 @@ function createApi(_name:string,_action:string){
   }
 }
 
-function createFuns(name:string,funs:Array<any>) : Object{
+function createFuns(name,funs){
   let s = Object.create(null);
   funs.forEach(function(action){
     s[action] = createApi(name, action);
@@ -37,14 +35,14 @@ function createFuns(name:string,funs:Array<any>) : Object{
   return s;
 }
 
-export default function parseJsApis(jsApis: Object) : Object{
-  let apis: Object = Object.create(null);
-  for (let name: string in jsApis) {
-    let node: Array<string> = name.split('.');
-    let funs: Array<string> = jsApis[name];
+export default function parseJsApis(jsApis){
+  let apis = Object.create(null);
+  for (let name in jsApis) {
+    let node = name.split('.');
+    let funs = jsApis[name];
     let staging = null;
-    let i: number = 0;
-    let j: number = node.length;
+    let i = 0;
+    let j = node.length;
     while (true) {
       if (!staging) {
         if (1 === j) {

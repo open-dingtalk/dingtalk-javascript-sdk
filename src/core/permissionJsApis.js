@@ -1,12 +1,9 @@
 /**
  * Created by xiangwenwen on 2017/3/27.
  */
-
-//@flow
-
 import ship from 'dingtalk-sdk-ship';
 
-export default function permissionJsApis(cb: Function,jsApisConfig:?Object, errorCb: ?Function){
+export default function permissionJsApis(cb,jsApisConfig, errorCb){
   if (!jsApisConfig){
     ship.ready(function(){
       cb(null);

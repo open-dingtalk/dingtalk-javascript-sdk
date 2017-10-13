@@ -1,6 +1,4 @@
-/* @flow */
-
-import logger from './logger.js';
+import { log, LogType } from 'dingtalk-javascript-utility';
 
 const checks = [
   'agentId',
@@ -11,7 +9,7 @@ const checks = [
   'jsApiList'
 ];
 
-export default function checkConfigVars(config:Object){
+export default function checkConfigVars(config){
   /*
     corpId,
     appId,
@@ -27,7 +25,7 @@ export default function checkConfigVars(config:Object){
   checks.map(function(v){
      const checkResult = infoKey.filter(function (k) { return v === k;});
      if (checkResult.length === 0){
-         logger.warn('configure : ' + v + 'is empty');
+         log(['configure : ' + v + 'is empty'],LogType.WARNING);
      }
   });
 }

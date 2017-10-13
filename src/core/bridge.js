@@ -1,15 +1,13 @@
-/* @flow */
-
 import ship from 'dingtalk-sdk-ship';
+import { log, LogType } from 'dingtalk-javascript-utility';
 import { extend } from 'shared/util.js';
-import logger from 'shared/logger.js';
 import checkConfigVars from 'shared/checkConfigVars.js';
 import permissionJsApis from './permissionJsApis.js';
 
-let dingtalkJsApisConfig: ?Object = null;
-let dingtalkQueue: ?Array<Function> = null;
-let dingtalkErrorCb: ?Function = null;
-let isReady: boolean = false;
+let dingtalkJsApisConfig = null;
+let dingtalkQueue = null;
+let dingtalkErrorCb = null;
+let isReady = false;
 
 function performQueue (){
   if (dingtalkQueue && dingtalkQueue.length > 0){
@@ -20,19 +18,12 @@ function performQueue (){
   }
 }
 
-function initDingtalkSDK() : Object{
-  let dingtalk: {
-    apis: Object,
-    config: Function,
-    init: Function,
-    ready: Function,
-    error: Function,
-    EventEmitter: Object
-  } = {
+function initDingtalkSDK(){
+  let dingtalk = {
     apis: {},
-    config: function(config: Object){
+    config: function(config){
       if (!config){
-        logger.warn('config is undefined,you must configure Dingtalk parameters');
+        log(['config is undefined,you must configure Dingtalk parameters'],LogType.WARNING);
         return;
       }
       if (process.env.NODE_ENV !== 'production'){
@@ -50,9 +41,9 @@ function initDingtalkSDK() : Object{
         performQueue();
       });
     },
-    ready: function(cb: Function){
+    ready: function(cb){
       if (!cb || typeof cb !== 'function'){
-        logger.warn('callback is undefined');
+        log(['callback is undefined'],LogType.WARNING);
         return;
       }
       if (isReady){

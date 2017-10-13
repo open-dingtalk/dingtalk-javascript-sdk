@@ -2,23 +2,16 @@
  * Created by xiangwenwen on 2017/3/24.
  */
 
-// @flow
-
-let cat: Object = {};
-let EventEmitter:{
-  on: Function,
-  off: Function,
-  once: Function,
-  emit: Function
-} = {
-  on: function(event: string,fun: Function){
+let cat = {};
+let EventEmitter = {
+  on: function(event,fun){
     let cbs = cat[event];
     cbs ? cbs.push(fun) : cat[event] = [];
     if (!cbs) {
       cat[event].push(fun);
     }
   },
-  off: function(event: string,fun: Function){
+  off: function(event,fun){
     let cbs = cat[event];
     if (!cbs) {
       return false;
@@ -42,7 +35,7 @@ let EventEmitter:{
     }
     return true;
   },
-  once: function(event: string,fun: Function){
+  once: function(event,fun){
     function _on(){
       EventEmitter.off(event,_on);
       fun.apply(this,arguments);
@@ -50,7 +43,7 @@ let EventEmitter:{
     _on.fun = fun;
     EventEmitter.on(event,_on);
   },
-  emit: function(event: string){
+  emit: function(event){
     let isString = typeof event === 'string';
     if (!isString){
       return;
@@ -68,7 +61,7 @@ let EventEmitter:{
   }
 };
 
-function toArray(list: Array<any>, index: ?number) {
+function toArray(list, index) {
   let _index = index || 0;
   let i = list.length - _index;
   let _array = new Array(i);

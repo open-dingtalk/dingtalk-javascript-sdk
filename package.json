@@ -2,13 +2,12 @@
   "name": "dingtalk-javascript-sdk",
   "version": "0.1.6",
   "description": "🔥 支持在钉钉客户端的所有容器（Web，Native or Weex）中调用JS-API（All-in）",
-  "main": "dist/dingtalk-sdk-min.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "es5": "node ./build/build.js build",
-    "flow": "flow check",
     "dev": "node ./build/build.js dev --watch",
-    "build": "npm run flow && npm run es5 && node ./build/build.js dev"
+    "build": "npm run es5 && node ./build/build.js dev"
   },
   "repository": {
     "type": "git",
@@ -17,9 +16,7 @@
   "author": "icepy",
   "license": "MIT",
   "devDependencies": {
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-es2015-rollup": "^3.0.0",
-    "flow-bin": "^0.42.0",
     "rollup": "^0.41.6",
     "rollup-plugin-alias": "^1.2.1",
     "rollup-plugin-babel": "^2.7.1",
@@ -29,6 +26,6 @@
     "rollup-watch": "^3.2.2"
   },
   "dependencies": {
-    "dingtalk-javascript-utility": "^0.1.7"
+    "dingtalk-javascript-utility": "^0.2.0"
   }
 }

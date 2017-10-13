@@ -1,5 +1,3 @@
-/* @flow */
-
 import polyfills from 'dingtalk-sdk-polyfills';
 
 let env = polyfills.env
@@ -14,7 +12,7 @@ if (isWeb){
   isIOS = UA && /iphone|ipad|ipod|ios/.test(UA);
 }
 
-function ios_exec(config:Object){
+function ios_exec(config){
   const webViewJavascriptBridge = window._WebViewJavascriptBridge;
   if (!webViewJavascriptBridge){
     throw 'runtime and bridge are not ready';
@@ -32,7 +30,7 @@ function ios_exec(config:Object){
   });
 }
 
-function android_exec(config:Object){
+function android_exec(config){
   let { body, onSuccess, onFail, context } = config;
   let { plugin, action, args } = body;
   const webViewJavascriptBridge = window.WebViewJavascriptBridgeAndroid;
@@ -43,7 +41,7 @@ function runAndroid(){
   window.WebViewJavascriptBridgeAndroid = window.nuva.require();
 }
 
-export default function web_exec(config:Object){
+export default function web_exec(config){
   if (isIOS){
     if (window._WebViewJavascriptBridge){
       ios_exec(config);

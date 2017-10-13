@@ -2,28 +2,21 @@
  * Created by xiangwenwen on 2017/3/24.
  */
 
-// @flow
-
 import exec from 'dingtalk-sdk-exec';
 import EventEmitter from './global-api/EventEmitter.js';
 import parseJsApis from './core/parseJsApis.js';
 import polyfills from 'dingtalk-sdk-polyfills';
 
 let env = polyfills.env;
-let globalEvent: Object = {};
+let globalEvent = {};
 const { isWeex } = env;
 if (isWeex){
   globalEvent = polyfills.requireModule('globalEvent');
 }
 
-function rtFunc(method: string): Function {
-  return function(cb: Function) {
-    const config:{
-      body: Object,
-      onSuccess: Function,
-      onFail: Function,
-      context: ?Object
-    } = {
+function rtFunc(method){
+  return function(cb) {
+    const config = {
       body: {
         plugin: 'runtime',
         action: method,
@@ -43,20 +36,11 @@ function rtFunc(method: string): Function {
   };
 }
 
-function initDingtalkRequire(cb: Function){
+function initDingtalkRequire(cb){
     rtFunc('getModules')(cb);
 }
 
-let ship: {
-  apis: ?Object,
-  isReady: boolean,
-  runtime: Object,
-  init: Function,
-  ready: Function,
-  on: Function,
-  off: Function,
-  EventEmitter: Object
-} = {
+let ship = {
   getModules: null,
   isReady: false,
   runtime: {
@@ -75,7 +59,7 @@ let ship: {
       }
     });
   },
-  ready: function(cb: Function){
+  ready: function(cb){
     if (ship.isReady){
       if (typeof cb === 'function'){
         cb();
@@ -88,12 +72,9 @@ let ship: {
       }
     }
   },
-  on: function(type: string, handler: Function){
+  on: function(type, handler){
     globalEvent.addEventListener(type,function(e){
-      const event:{
-        preventDefault: Function,
-        detail: Object
-      } = {
+      const event = {
         preventDefault: function () {
           console.warn('当前环境不支持 preventDefault')
         },

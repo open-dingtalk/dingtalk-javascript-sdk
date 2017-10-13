@@ -1,7 +1,5 @@
 
-/* @flow */
-
-function installNativeEvent(dingtalk:Object){
+function installNativeEvent(dingtalk){
   dingtalk.on = function(type, listener, useCapture){
     document.addEventListener(type, listener, useCapture);
   }

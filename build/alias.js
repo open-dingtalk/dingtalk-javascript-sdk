@@ -5,9 +5,9 @@ function absolute (str) {
 }
 
 module.exports = {
-  'dingtalk-sdk-polyfills': absolute('package/dingtalk-sdk-polyfills/index.js'),
-  'dingtalk-sdk-exec': absolute('package/dingtalk-sdk-exec/index.js'),
-  'dingtalk-sdk-ship': absolute('package/dingtalk-sdk-ship/index.js'),
+  'dingtalk-sdk-polyfills': absolute('src/package/dingtalk-sdk-polyfills/index.js'),
+  'dingtalk-sdk-exec': absolute('src/package/dingtalk-sdk-exec/index.js'),
+  'dingtalk-sdk-ship': absolute('src/package/dingtalk-sdk-ship/index.js'),
   'shared': absolute('src/shared'),
   'core': absolute('src/core')
 };

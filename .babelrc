@@ -1,5 +1,4 @@
 {
     "presets": [[
-        "es2015", { "modules": false }]],
-    "plugins": ["transform-flow-strip-types"]
+        "es2015", { "modules": false }]]
 }

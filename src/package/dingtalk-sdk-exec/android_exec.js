@@ -2,12 +2,11 @@
  * Created by xiangwenwen on 2017/3/24.
  */
 
-// @flow
-const STATUS_NO_RESULT: string = '0';
-const STATUS_OK: string = '1';
-const STATUS_ERROR: string = '2';
+const STATUS_NO_RESULT = '0';
+const STATUS_OK = '1';
+const STATUS_ERROR = '2';
 
-export default function android_exec(exec:Function,config:Object){
+export default function android_exec(exec,config){
   const body = config.body;
   const win = config.onSuccess;
   const fail = config.onFail;

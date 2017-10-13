@@ -2,9 +2,7 @@
  * Created by xiangwenwen on 2017/3/24.
  */
 
-// @flow
-
-export default function ios_exec(exec:Function,config:Object){
+export default function ios_exec(exec,config){
   const body = config.body;
   const win = config.onSuccess;
   const fail = config.onFail;
