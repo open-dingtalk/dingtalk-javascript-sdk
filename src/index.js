@@ -7,23 +7,23 @@ import initWeexDingtalkSDK from './platforms/weex/index.js';
 import { log, LogType, env } from 'dingtalk-javascript-utility';
 
 let initCtrl = true;
-let dingtalkSDK= {};
+let dingtalkSDK = {};
 const { isDingtalk, isWeex, isWeb } = env;
 
 log(['current environment: ' + env.platform]);
 
-if (!isDingtalk){
-  log(['can only open the page be Dingtalk Container'],LogType.WARNING);
-} 
-
-if (initCtrl){
-  initCtrl = false;
-  if (isWeex){
-    dingtalkSDK = initWeexDingtalkSDK();
-  } else if (isWeb){
-    dingtalkSDK = initWebDingtalkSDK();
+if (isDingtalk){
+  if (initCtrl){
+    initCtrl = false;
+    if (isWeex){
+      dingtalkSDK = initWeexDingtalkSDK();
+    } else if (isWeb){
+      dingtalkSDK = initWebDingtalkSDK();
+    }
+    dingtalkSDK.init();
   }
-  dingtalkSDK.init();
+} else {
+  log(['can only open the page be Dingtalk Container'],LogType.WARNING);
 }
 
 export default dingtalkSDK;

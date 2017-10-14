@@ -5,7 +5,6 @@
 import ship from 'dingtalk-sdk-ship';
 import { log, LogType } from 'dingtalk-javascript-utility';
 import { extend } from 'shared/util.js';
-import checkConfigVars from 'shared/checkConfigVars.js';
 import permissionJsApis from './permissionJsApis.js';
 
 let dingtalkJsApisConfig = null;
@@ -29,9 +28,6 @@ function initDingtalkSDK(){
       if (!config){
         log(['config is undefined,you must configure Dingtalk parameters'],LogType.WARNING);
         return;
-      }
-      if (process.env.NODE_ENV !== 'production'){
-        checkConfigVars(config);
       }
       dingtalkJsApisConfig = config;
     },

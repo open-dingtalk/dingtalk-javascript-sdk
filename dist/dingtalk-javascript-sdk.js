@@ -843,31 +843,6 @@ var ship = {
   EventEmitter: EventEmitter
 };
 
-var checks = ['agentId', 'corpId', 'timeStamp', 'nonceStr', 'signature', 'jsApiList'];
-
-function checkConfigVars(config) {
-  /*
-    corpId,
-    appId,
-    timeStamp,
-    nonceStr,
-    signature,
-    jsApiList,
-    type,
-    agentId
-   */
-  var checkInfo = [];
-  var infoKey = Object.keys(config);
-  checks.map(function (v) {
-    var checkResult = infoKey.filter(function (k) {
-      return v === k;
-    });
-    if (checkResult.length === 0) {
-      log(['configure : ' + v + 'is empty'], LogType.WARNING);
-    }
-  });
-}
-
 /**
  * Created by xiangwenwen on 2017/3/27.
  */
@@ -921,9 +896,6 @@ function initDingtalkSDK() {
       if (!_config) {
         log(['config is undefined,you must configure Dingtalk parameters'], LogType.WARNING);
         return;
-      }
-      if (process.env.NODE_ENV !== 'production') {
-        checkConfigVars(_config);
       }
       dingtalkJsApisConfig = _config;
     },
@@ -1001,9 +973,9 @@ var isWeex = env.isWeex;
 var isWeb = env.isWeb;
 
 
-if (!isDingtalk) {
-  log(['can only open the page be Dingtalk Container'], LogType.WARNING);
-} else {
+log(['current environment: ' + env.platform]);
+
+if (isDingtalk) {
   if (initCtrl) {
     initCtrl = false;
     if (isWeex) {
@@ -1013,6 +985,8 @@ if (!isDingtalk) {
     }
     dingtalkSDK.init();
   }
+} else {
+  log(['can only open the page be Dingtalk Container'], LogType.WARNING);
 }
 
 var dingtalkSDK$1 = dingtalkSDK;
