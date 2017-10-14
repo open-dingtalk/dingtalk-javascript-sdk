@@ -4,7 +4,7 @@
 
 import android_exec from './android_exec.js';
 import ios_exec from './ios_exec.js';
-import { env,requireModule } from 'dingtalk-javascript-utility';
+import { env, requireModule } from 'dingtalk-javascript-utility';
 import web_exec from './web_exec.js';
 
 let nativeExec = null;
