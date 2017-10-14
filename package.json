@@ -1,6 +1,6 @@
 {
   "name": "dingtalk-javascript-sdk",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "🔥 支持在钉钉客户端的所有容器（Web，Native or Weex）中调用JS-API（All-in）",
   "main": "dist/dingtalk-javascript-sdk-min.js",
   "scripts": {
