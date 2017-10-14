@@ -310,10 +310,10 @@ var isWeb$1 = env$1.platform === 'Web';
 var isWeexiOS$1 = env$1.platform === 'iOS';
 var isWeexAndroid$1 = env$1.platform === 'android';
 var isWeex$3 = isWeexiOS$1 || isWeexAndroid$1;
-var dingtalk$1 = env$1.dingtalk;
+var dingtalk = env$1.dingtalk;
 var bundleFrameworkType = env$1.bundleFrameworkType;
-var bundleUrl = dingtalk$1.bundleUrl;
-var originalUrl = dingtalk$1.originalUrl;
+var bundleUrl = dingtalk.bundleUrl;
+var originalUrl = dingtalk.originalUrl;
 
 
 var UA = void 0;
