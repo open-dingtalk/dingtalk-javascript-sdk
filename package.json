@@ -26,6 +26,6 @@
     "rollup-watch": "^3.2.2"
   },
   "dependencies": {
-    "dingtalk-javascript-utility": "^0.2.0"
+    "dingtalk-javascript-utility": "^0.2.2"
   }
 }

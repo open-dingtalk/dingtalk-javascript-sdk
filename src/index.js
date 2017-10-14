@@ -10,18 +10,20 @@ let initCtrl = true;
 let dingtalkSDK= {};
 const { isDingtalk, isWeex, isWeb } = env;
 
+log(['current environment: ' + env.platform]);
+
 if (!isDingtalk){
   log(['can only open the page be Dingtalk Container'],LogType.WARNING);
-} else {
-  if (initCtrl){
-    initCtrl = false;
-    if (isWeex){
-      dingtalkSDK = initWeexDingtalkSDK();
-    } else if (isWeb){
-      dingtalkSDK = initWebDingtalkSDK();
-    }
-    dingtalkSDK.init();
+} 
+
+if (initCtrl){
+  initCtrl = false;
+  if (isWeex){
+    dingtalkSDK = initWeexDingtalkSDK();
+  } else if (isWeb){
+    dingtalkSDK = initWebDingtalkSDK();
   }
+  dingtalkSDK.init();
 }
 
 export default dingtalkSDK;
